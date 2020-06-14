@@ -39,6 +39,9 @@ because importing a mailbox implies waiting for it until it becomes available
 
 ## Example
 
+A full compilable example similar to the one outlined below can be found in the
+repository in the [examples/simple_lmp](examples/simple_lmp/) directory.
+
 ```ada
 package Message_Types is
 
