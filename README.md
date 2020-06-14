@@ -29,7 +29,7 @@ actually implement that possibility.
 As said, mailboxes are referred to by name, so there are no (visible) pointers
 or such involved.
 
-To create a communication between two task that don't even know that the other
+To create a communication between two tasks that don't even know that the other
 party exists, one needs to export the mailbox (assigning a name to it), while
 the other one can import it using the same name.
 
@@ -147,15 +147,14 @@ other. Talk about decoupling.
 
 Mailboxes are bi-directional, the can be exported/imported by any task, no
 matter if they are receiving or sending and they can be used by multiple tasks
-each (i.e. you can have 2 tasks sending to the same mailbox, and 5 receivers).
+each (e.g. you can have 2 tasks sending to the same mailbox, and 5 receivers).
 
 Of course, there should only be one mailbox object declared, so only one task
-can "own" the mailbox. You just should agree on a pattern.
+can "own" the mailbox. You just should agree on which one.
+The recommended pattern is that the server (i.e. Reader task) which processes the messages owns the mailbox.
 
-If you need two-way communication between tasks, you need two mailboxes. One
-for sending, one for receiving for each task. Don't forget that in that case
-you may run into deadlocks, having cycles in the mailbox communication should
-always be carefully reviewed.
+If you need two-way communication between tasks, you need two mailboxes, of course, otherwise a task would end up sending messages to itself.
+Don't forget that in that case you may run into deadlocks, having cycles in the mailbox communication should be avoided and at the very least very carefully reviewed.
 
 ## Compatibility
 
