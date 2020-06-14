@@ -1,7 +1,7 @@
 # Message Passing
 Message passing with mailboxes with no dynamic memory allocation.
 
-This is and old proof-of-concept project which I dusted off from the attic.
+This is an old proof-of-concept project which I dusted off from the attic.
 
 ## Purpose
 
@@ -12,6 +12,8 @@ Everything here is bounded (it was initially targeted for a restricted embedded
 system), so mailboxes are allocated statically with a discriminant denoting
 their size. In most instances where you would want to use that, this is not a
 restriction, but rather a feature.
+
+## The Trick
 
 So far, so simple. The trick used here is that mailboxes are never referred to
 them directly, you only refer to them by a unique name and the user of the
@@ -59,18 +61,18 @@ Same for a receiver, so I am omitting that package spec.
 
 Now the `Sender`'s body:
 
-```
+```ada
 with Local_Message_Passing;
 with Message_Types;
 
 package body Sender is
 
-   --  Instantiate the Local_Message_Passing package, so we can declared
+   --  Instantiate the Local_Message_Passing package, so we can declare
    --  mailboxes.
    package Mailboxes is
      new Local_Message_Passing (Message => Message_Types.The_Message);
-   --  The only thing receiver and sender should agree is the message type
-   --  being exchanged.
+   --  The only thing receiver and sender should agree on is the message
+   --  type being exchanged.
 
    --  Instantiate a mailbox with space for 16 messages.
    My_Mailbox : Mailboxes.Mailbox (Size => 16);
@@ -110,11 +112,9 @@ package body Receiver is
    --  mailbox handles.
    package Mailboxes is
      new Local_Message_Passing (Message => Message_Types.The_Message);
-   --  The only thing receiver and sender should agree is the message type
-   --  being exchanged.
 
    --  The mailbox resides in the Sender task, so we don't declare a
-   --  mailbox.
+   --  mailbox, but a handle to one.
    Handle : Mailboxes.Handle;
 
    --  other needed stuff ...
@@ -141,8 +141,9 @@ package body Receiver is
 end Receiver;
 ```
 
-Note that `Mailboxes` instances are two different ones and the tasks don't know
-about each other. Talk about decoupling.
+Note that the `Mailboxes` instances are two different ones (which is not
+strictly necessary, but convenient), and the tasks don't know about each
+other. Talk about decoupling.
 
 Mailboxes are bi-directional, the can be exported/imported by any task, no
 matter if they are receiving or sending and they can be used by multiple tasks
