@@ -1,8 +1,8 @@
 project Message_Passing is
 
-   for Source_Dirs use ("sources", "examples");
+   for Source_Dirs use ("sources", "extra", "examples", "examples/simple_lmp");
    for Object_Dir use "gnat_build";
-   for Main use ("test_lmp.adb", "msg_consumer.adb");
+   for Main use ("simple_lmp.adb", "test_lmp.adb", "msg_consumer.adb");
 
    package Builder is
       for Default_Switches ("ada") use ("-s", "-k", "-g", "-j0");
@@ -21,3 +21,4 @@ project Message_Passing is
    end Pretty_Printer;
 
 end Message_Passing;
+

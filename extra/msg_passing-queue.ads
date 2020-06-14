@@ -52,7 +52,7 @@ private
    type Queue_Type is array (1 .. Message_Counter'Last) of Letter;
 
    ---------------------------------------------------------------------
-   --  protected spec Mutex
+   --  Mutex
    ---------------------------------------------------------------------
    protected type Mutex is
 

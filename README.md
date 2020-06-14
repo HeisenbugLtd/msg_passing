@@ -150,11 +150,15 @@ matter if they are receiving or sending and they can be used by multiple tasks
 each (e.g. you can have 2 tasks sending to the same mailbox, and 5 receivers).
 
 Of course, there should only be one mailbox object declared, so only one task
-can "own" the mailbox. You just should agree on which one.
-The recommended pattern is that the server (i.e. Reader task) which processes the messages owns the mailbox.
+can "own" the mailbox. You just should agree on which one. The recommended
+pattern is that the server (i.e. Reader task) which processes the messages owns
+the mailbox.
 
-If you need two-way communication between tasks, you need two mailboxes, of course, otherwise a task would end up sending messages to itself.
-Don't forget that in that case you may run into deadlocks, having cycles in the mailbox communication should be avoided and at the very least very carefully reviewed.
+If you need two-way communication between tasks, you need two mailboxes, of
+course, otherwise a task would end up sending messages to itself.
+Don't forget that in that case you may run into deadlocks, having cycles in the
+mailbox communication should be avoided and at the very least very carefully
+reviewed.
 
 ## Compatibility
 
@@ -162,4 +166,3 @@ Unless I made a mistake when dusting off this stuff, this is about 100%
 portable Ada95 code. Back when I wrote that we did not have an Ada2005 compiler
 for our target. Hence, no container library, so the queue types are done by
 hand.
-
