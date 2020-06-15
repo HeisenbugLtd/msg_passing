@@ -148,7 +148,7 @@ Note that the `Mailboxes` instances are two different ones (which is not
 strictly necessary, but convenient), and the tasks don't know about each
 other. Talk about decoupling.
 
-Mailboxes are bi-directional, the can be exported/imported by any task, no
+Mailboxes are bi-directional, they can be exported/imported by any task, no
 matter if they are receiving or sending and they can be used by multiple tasks
 each (e.g. you can have 2 tasks sending to the same mailbox, and 5 receivers).
 
