@@ -9,7 +9,7 @@
 pragma License (Unrestricted);
 
 with Ada.Real_Time;
-with Ada.Text_IO; --  Using Ada.Text_IO in tasking context is not task
+with Ada.Text_IO; --  Using Ada.Text_IO in tasking context is not
                   --  safe, but use it for the sake of a simple example.
 with Local_Message_Passing;
 with Message_Types;
